@@ -1,0 +1,161 @@
+<!-- 月统计人数 -->
+<!DOCTYPE html>
+<html style="height: 100%">
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../static/h-ui/css/H-ui.min.css" />
+    <title></title>
+</head>
+<body>
+    <div id="chart-panel">
+        <div id="main" style="width:100%;height:800px;"></div>
+    </div>
+    <select id="selectYear" style="width: 150px;position:absolute;bottom: 10%;right:50%;" class="input-text">
+        <option>选择年份</option>
+        <option value="2015" selected>2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+    </select>
+
+    <script src="../../echart/jquery-1.11.3.min.js"></script>
+    <script src="../../echart/js/common.js"></script>
+    <script src="../../echart/echarts.js"></script>
+    <script>
+        getSelectYear(2015);
+        /* 封装ajax */
+        function getSelectYear(selYear){
+            $.ajax({
+                type: "GET",
+                url: "http://" + ip + "/bcat/user/chart.do?year=" + selYear,
+                jsonpCallback: "callback",
+                dataType: "jsonp",
+                success: function(data){
+                    var loginNumber = data.result.login;
+                    var registerNumber = data.result.register;
+                    //console.log(loginNumber,registerNumber);
+                    /* 遍历注册，登录对象 */
+                    var loginData = [];
+                    var registerData = [];
+                    for(var l in loginNumber){
+                        loginData.push(loginNumber[l]);
+                    }
+                    for(var r in registerNumber){
+                        registerData.push(registerNumber[r])
+                    }
+                    //console.log(loginData,registerData);
+                    app.setOption({series:[{name:"注册人数",data:registerData},{name:'登录人数',data:loginData}]});
+                }
+            });
+        }
+        /* 获得select选项值 */
+        $('#selectYear').change(function(){
+            var year = $('#selectYear').val();
+            if(year === '选择年份'){
+               return;
+            }
+            else{
+                getSelectYear(year);
+                //console.log(parseInt(year));
+            }
+        });
+        /* 画图 */
+        var app = echarts.init(document.getElementById('main'));
+        app.on('click', function(params){
+            var month = params.name.length == 3 ? params.name.slice(0,2):params.name.slice(0,1);
+            var selyear = $('#selectYear').val();
+            window.location.href = "week.html?month=" + month + '&year=' + selyear;
+        });
+        app.title = '多 Y 轴示例';
+        var colors = ['#5793f3','#d14a61','#675bba'];
+        option = {
+            color: colors,
+            tooltip: {trigger: 'axis'},
+            grid: {right: '20%'},
+            toolbox: {
+                feature: {
+                    dataView: {show: true, readOnly: false},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                }
+            },
+            legend: {data: ['注册人数','登录人数','密码错误次数','请求错误次数']},
+            xAxis: [{
+                    type: 'category',
+                    axisTick: {alignWithLabel: true},
+                    data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                }],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '注册人数',
+                    min: 0,
+                    position: 'right',
+                    axisLine: {lineStyle: {color: colors[0]}},
+                    axisLabel: {formatter: '{value} 人'}
+                },
+                {
+                    type: 'value',
+                    name: '登录人数',
+                    min: 0,
+                    position: 'right',
+                    offset: 80,
+                    axisLine: {lineStyle: {color: colors[1]}},
+                    axisLabel: {formatter: '{value} 人'}
+                },
+                {
+                    type: 'value',
+                    name: '错误次数',
+                    min: 0,
+                    position: 'left',
+                    axisLine: {
+                        lineStyle: {
+                            color: colors[2]
+                        }
+                    },
+                    axisLabel: {formatter: '{value} 次'}
+                },
+                {
+                    type: 'value',
+                    name: '错误次数',
+                    min: 0,
+                    position: 'left',
+                    axisLine: {lineStyle: {color: colors[2]}},
+                    axisLabel: {formatter: '{value} 次'}
+                },
+
+            ],
+            series: [
+                {
+                    name: '注册人数',
+                    type: 'bar',
+                    //yAxisIndex: 0,
+                    data: []
+                },
+                {
+                    name: '登录人数',
+                    type: 'bar',
+                   //yAxisIndex: 1,
+                    data: []
+                },
+                {
+                    name: '密码错误次数',
+                    type: 'line',
+                    yAxisIndex: 2,
+                    data: []
+                },
+                {
+                    name: '请求错误次数',
+                    type: 'line',
+                    yAxisIndex: 3,
+                    data: []
+                }
+            ]
+        };
+        app.setOption(option);
+        $(window).resize(function(){
+            app.resize();
+        });
+    </script>
+</body>
+</html>
