@@ -33,9 +33,9 @@
 			<div class="text-c"> 日期范围：
 				<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> -
 				<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
-				<input type="text" class="input-text" style="width:250px" placeholder="输入客户名称、电话、邮箱" id="" name="">
+				<input type="text" class="input-text" style="width:250px" placeholder="输入客户名称" id="" name="">
 				<button type="submit" class="btn btn-success radius" id="" name="">
-					<i class="Hui-iconfont">&#xe665;</i> 搜客户
+					<i class="Hui-iconfont">&#xe665;</i> 搜索
 				</button>
 			</div>
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
@@ -46,12 +46,15 @@
 					</a> 
 				</span>
 				<span class="r">共有数据：
-					<strong id="total">88</strong> 条
+					<strong id="count">88</strong> 条
 				</span>
 			</div>
 			<div class="mt-20">
 				<table class="table table-border table-bordered table-hover table-bg table-sort">
 					<thead>
+						<tr>
+							<th scope="col" colspan="10">哒哒用户列表</th>
+						</tr>
 						<tr class="text-c">
 							<th width="25"><input type="checkbox" name="" value=""></th>
 							<th width="80">ID</th>
@@ -68,22 +71,8 @@
 					<tbody id="tbody">
 						<tr class="text-c">
 							<td><input type="checkbox" value="1" name=""></td>
-							<td>2</td>
-							<td><u style="cursor:pointer" class="text-primary" onclick="partner_show('张三','../../codeing.html','10001','360','400')">张三</u></td>
-							<td>1014875985</td>
-							<td>男</td>
-							<td>13000000000</td>
-							<td>admin@mail.com</td>
-							<td class="text-l">北京市 海淀区</td>
-							<td>2014-6-11 11:11:42</td>
-							<td class="td-manage">
-								<a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
-							</td>
-						</tr>
-						<tr class="text-c">
-							<td><input type="checkbox" value="1" name=""></td>
 							<td>1</td>
-							<td><u style="cursor:pointer" class="text-primary" onclick="partner_show('张三','../../codeing.html','10001','460','500')">张三</u></td>
+							<td><u style="cursor:pointer" class="text-primary" onclick="dada_show('张三','.dada-show.html','10001','360','400')">张三</u></td>
 							<td>1014875985</td>
 							<td>男</td>
 							<td>13000000000</td>
@@ -91,7 +80,7 @@
 							<td class="text-l">北京市 海淀区</td>
 							<td>2014-6-11 11:11:42</td>
 							<td class="td-manage">
-								<a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+								<a title="删除" href="javascript:;" onclick="dada_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
 							</td>
 						</tr>
 					</tbody>
@@ -168,11 +157,11 @@
 //			});
 //			
 			/*用户-查看*/
-			function partner_show(title, url, id, w, h) {
+			function dada_show(title, url, id, w, h) {
 				layer_show(title, url, w, h);
 			}
 			/*用户-删除*/
-			function partner_del(obj, id) {
+			function dada_del(obj, id) {
 				layer.confirm('确认要删除吗？', function(index) {
 					$(obj).parents("tr").remove();
 					layer.msg('已删除!', {
@@ -180,6 +169,10 @@
 						time: 1000
 					});
 				});
+			}
+			/*批量删除*/
+			function datadel(){
+				layer_show("批量删除", "dada-show.html",360,480);
 			}
 		</script>
 	</body>

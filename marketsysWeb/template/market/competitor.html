@@ -1,41 +1,31 @@
 ﻿<!DOCTYPE HTML>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="renderer" content="webkit|ie-comp|ie-stand">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
-<script type="text/javascript" src="lib/PIE_IE678.js"></script>
-<![endif]-->
 		<link rel="stylesheet" type="text/css" href="../../static/h-ui/css/H-ui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/H-ui.admin.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/Hui-iconfont/1.0.7/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../../lib/icheck/icheck.css" />
 		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/skin/default/skin.css" id="skin" />
 		<link rel="stylesheet" type="text/css" href="../../static/h-ui.admin/css/style.css" />
-		<!--[if IE 6]>
-<script type="text/javascript" src="http://lib.h-ui.net/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
-		<title>客户管理</title>
+		<title>竞争对手管理</title>
 	</head>
 
 	<body>
-		<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 客户中心 <span class="c-gray en">&gt;</span> 客户管理
+		<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 营销管理中心 <span class="c-gray en">&gt;</span> 竞争对手管理
 			<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 		</nav>
 		<div class="page-container">
 			<div class="text-c"> 日期范围：
 				<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> -
 				<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
-				<input type="text" class="input-text" style="width:250px" placeholder="输入客户名称、电话、邮箱" id="" name="">
+				<input type="text" class="input-text" style="width:250px" placeholder="输入竞争对手名称" id="" name="">
 				<button type="submit" class="btn btn-success radius" id="" name="">
-					<i class="Hui-iconfont">&#xe665;</i> 搜客户
+					<i class="Hui-iconfont">&#xe665;</i> 搜索
 				</button>
 			</div>
 			<div class="cl pd-5 bg-1 bk-gray mt-20">
@@ -55,43 +45,30 @@
 						<tr class="text-c">
 							<th width="25"><input type="checkbox" name="" value=""></th>
 							<th width="80">ID</th>
-							<th width="100">用户名</th>
-							<th width="40">性别</th>
-							<th width="90">手机</th>
-							<th width="150">邮箱</th>
-							<th width="">地址</th>
-							<th width="130">注册时间</th>
-							<th width="70">QQ</th>
+							<th width="100">竞争对手名称</th>
+							<th width="40">用户量</th>
+							<th width="90">上一年销售总额</th>
+							<th width="150">备注</th>
+							<th width="130">创建时间</th>
 							<th width="100">操作</th>
 						</tr>
 					</thead>
 					<tbody id="tbody">
 						<tr class="text-c">
 							<td><input type="checkbox" value="1" name=""></td>
-							<td>2</td>
-							<td><u style="cursor:pointer" class="text-primary" onclick="partner_show('张三','partner-show.html','10001','360','400')">张三</u></td>
-							<td>男</td>
-							<td>13000000000</td>
-							<td>admin@mail.com</td>
-							<td class="text-l">北京市 海淀区</td>
-							<td>2014-6-11 11:11:42</td>
-							<td>1014875985</td>
-							<td class="td-manage">
-								<a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
-							</td>
-						</tr>
-						<tr class="text-c">
-							<td><input type="checkbox" value="1" name=""></td>
 							<td>1</td>
-							<td><u style="cursor:pointer" class="text-primary" onclick="partner_show('张三','partner-show.html','10001','460','500')">张三</u></td>
-							<td>男</td>
-							<td>13000000000</td>
-							<td>admin@mail.com</td>
-							<td class="text-l">北京市 海淀区</td>
+							<td><u style="cursor:pointer" class="text-primary" onclick="competitor_show('小狼信标','competitor-show.html','10001','360','400')">小狼信标</u></td>
+							<td>100000</td>
+							<td>￥100000000</td>
+							<td>大公司</td>
 							<td>2014-6-11 11:11:42</td>
-							<td>1014875985</td>
 							<td class="td-manage">
-								<a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+								<a title="编辑" href="javascript:;" onclick="competitor_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none">
+									<i class="Hui-iconfont">&#xe6df;</i>
+								</a>
+								<a title="删除" href="javascript:;" onclick="competitor_del(this,'1')" class="ml-5" style="text-decoration:none">
+									<i class="Hui-iconfont">&#xe6e2;</i>
+								</a>
 							</td>
 						</tr>
 					</tbody>
@@ -116,7 +93,7 @@
 						//{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
 						{
 							"orderable": false,
-							"aTargets": [0, 9]
+							"aTargets": [0, 7]
 						} // 制定列不参与排序
 					]
 				});
